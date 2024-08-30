@@ -7,4 +7,6 @@ catboost
 xgboost
 Flask
 dill
+imbalanced-learn
+xgboost --no-binary xgboost
 #-e .

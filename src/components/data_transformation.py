@@ -98,6 +98,9 @@ class DataTransformation:
 
             input_feature_train_arr=preprocessing_obj.fit_transform(input_feature_train_df)
             input_feature_test_arr=preprocessing_obj.transform(input_feature_test_df)
+            # Apply SMOTE to upsample the training data
+            
+
 
             train_arr = np.c_[
                 input_feature_train_arr, np.array(target_feature_train_df)
