@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Marketing Campaign Predictor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background-color: #ffffff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 2rem;
+        }
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: #34495e;
+        }
+        input[type="text"],
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #bdc3c7;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        input[type="submit"] {
+            background-color: #3498db;
+            color: #ffffff;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+        }
+        input[type="submit"]:hover {
+            background-color: #2980b9;
+        }
+        .error {
+            color: #e74c3c;
+            margin-top: 1rem;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container animate__animated animate__fadeIn">
+        <h1 class="animate__animated animate__bounceInDown">Digital Marketing Campaign Predictor</h1>
+        <form action="{{ url_for('predict_datapoint')}}" method="post" class="animate__animated animate__fadeInUp">
+            <div class="form-group">
+                <label for="gender">Gender</label>
+                <select id="gender" name="gender" required>
+                    <option value="" selected disabled>Select Gender</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="age">Age</label>
+                <input type="number" id="age" name="age" required>
+            </div>
+            <div class="form-group">
+                <label for="income">Income</label>
+                <input type="number" id="income" name="income" step="0.01" required>
+            </div>
+            <div class="form-group">
+                <label for="campaign_channel">Campaign Channel</label>
+                <select id="campaign_channel" name="campaign_channel" required>
+                    <option value="" selected disabled>Select Campaign Channel</option>
+                    <option value="Social Media">Social Media</option>
+                    <option value="Email">Email</option>
+                    <option value="PPC">PPC</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="campaign_type">Campaign Type</label>
+                <select id="campaign_type" name="campaign_type" required>
+                    <option value="" selected disabled>Select Campaign Type</option>
+                    <option value="Awareness">Awareness</option>
+                    <option value="Retention">Retention</option>
+                    <option value="Conversion">Conversion</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="ad_spend">Ad Spend</label>
+                <input type="number" id="ad_spend" name="ad_spend" step="0.01" required>
+            </div>
+            <div class="form-group">
+                <label for="click_through_rate">Click Through Rate</label>
+                <input type="number" id="click_through_rate" name="click_through_rate" step="0.001" required>
+            </div>
+            <div class="form-group">
+                <label for="conversion_rate">Conversion Rate</label>
+                <input type="number" id="conversion_rate" name="conversion_rate" step="0.001" required>
+            </div>
+            <div class="form-group">
+                <label for="website_visits">Website Visits</label>
+                <input type="number" id="website_visits" name="website_visits" required>
+            </div>
+            <div class="form-group">
+                <label for="pages_per_visit">Pages Per Visit</label>
+                <input type="number" id="pages_per_visit" name="pages_per_visit" step="0.01" required>
+            </div>
+            <div class="form-group">
+                <label for="time_on_site">Time On Site</label>
+                <input type="number" id="time_on_site" name="time_on_site" step="0.01" required>
+            </div>
+            <div class="form-group">
+                <label for="social_shares">Social Shares</label>
+                <input type="number" id="social_shares" name="social_shares" required>
+            </div>
+            <div class="form-group">
+                <label for="email_opens">Email Opens</label>
+                <input type="number" id="email_opens" name="email_opens" required>
+            </div>
+            <div class="form-group">
+                <label for="email_clicks">Email Clicks</label>
+                <input type="number" id="email_clicks" name="email_clicks" required>
+            </div>
+            <div class="form-group">
+                <label for="previous_purchases">Previous Purchases</label>
+                <input type="number" id="previous_purchases" name="previous_purchases" required>
+            </div>
+            <div class="form-group">
+                <label for="loyalty_points">Loyalty Points</label>
+                <input type="number" id="loyalty_points" name="loyalty_points" required>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Predict Conversion" class="animate__animated animate__pulse animate__infinite">
+            </div>
+        </form>
+        {% if error %}
+        <div class="error animate__animated animate__shakeX">{{ error }}</div>
+        {% endif %}
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
+    <script>
+        new WOW().init();
+    </script>
+</body>
+</html>
